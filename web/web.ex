@@ -52,6 +52,8 @@ defmodule Notex.Web do
       import Notex.Router.Helpers
       import Notex.ErrorHelpers
       import Notex.Gettext
+
+      import Notex.SessionController, only: [current_user: 1, logged_in?: 1]
     end
   end
 

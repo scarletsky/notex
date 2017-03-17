@@ -1,8 +1,13 @@
 defmodule Notex.User do
   use Notex.Web, :model
 
-  schema "users" do
+  @required_fields ~w(email password)
 
+  schema "users" do
+    field :email, :string
+    field :username, :string
+    field :password, :string
+    field :is_authenticated, :boolean
     timestamps()
   end
 
@@ -11,7 +16,7 @@ defmodule Notex.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [])
-    |> validate_required([])
+    |> cast(params, @required_fields)
+    |> unique_constraint(:email)
   end
 end
