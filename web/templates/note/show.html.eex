@@ -1,0 +1,8 @@
+<h2>Show note</h2>
+
+<ul>
+
+</ul>
+
+<%= link "Edit", to: note_path(@conn, :edit, @note) %>
+<%= link "Back", to: note_path(@conn, :index) %>
