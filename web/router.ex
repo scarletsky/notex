@@ -24,6 +24,7 @@ defmodule Notex.Router do
     delete "/logout", SessionController, :delete
 
     resources "/notes", NoteController
+    resources "/tags", TagController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

@@ -1,11 +1,10 @@
-defmodule Notex.Note do
+defmodule Notex.Tag do
   use Notex.Web, :model
 
-  schema "notes" do
-    field :title, :string
-    field :content, :string
+  schema "tags" do
+    field :name, :string
+    field :aliases, {:array, :string}
     field :creator_id, :integer
-    field :is_secret, :boolean
     timestamps()
   end
 
@@ -14,7 +13,7 @@ defmodule Notex.Note do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :content, :creator_id])
+    |> cast(params, [])
     |> validate_required([])
   end
 end
