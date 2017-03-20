@@ -5,6 +5,7 @@ defmodule Notex.Tag do
     field :name, :string
     field :aliases, {:array, :string}
     field :creator_id, :integer
+    many_to_many :notes, Notex.Note, join_through: Notex.NoteTag
     timestamps()
   end
 

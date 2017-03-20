@@ -4,7 +4,7 @@ defmodule Notex.Repo.Migrations.CreateTag do
   def change do
     create table(:tags) do
       add :name, :string
-      add :alias, {:array, :string}
+      add :aliases, {:array, :string}
       add :creator_id, references(:users)
       timestamps()
     end

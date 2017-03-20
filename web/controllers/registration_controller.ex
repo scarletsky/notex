@@ -12,7 +12,7 @@ defmodule Notex.RegistrationController do
     changeset = User.changeset(%User{}, user_params)
 
     case register(changeset) do
-      {:ok, changeset} ->
+      {:ok, _} ->
         conn
         |> put_flash(:info, "Your account was created")
         |> redirect(to: "/")

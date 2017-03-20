@@ -6,6 +6,7 @@ defmodule Notex.Note do
     field :content, :string
     field :creator_id, :integer
     field :is_secret, :boolean
+    many_to_many :tags, Notex.Tag, join_through: Notex.NoteTag
     timestamps()
   end
 
