@@ -24,11 +24,11 @@ defmodule Notex.Router do
     delete "/logout", SessionController, :delete
 
     resources "/notes", NoteController
-    resources "/tags", TagController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Notex do
-  #   pipe_through :api
-  # end
+  scope "/api", Notex do
+    pipe_through :api
+    resources "/tags", TagController, except: [:new, :edit]
+  end
 end

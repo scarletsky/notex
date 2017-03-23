@@ -14,7 +14,7 @@ defmodule Notex.Tag do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [])
-    |> validate_required([])
+    |> cast(params, [:name, :aliases, :creator_id])
+    |> validate_required([:name, :creator_id])
   end
 end

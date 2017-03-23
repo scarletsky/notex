@@ -45,7 +45,7 @@ defmodule Notex.SessionController do
     user = Notex.Repo.get_by(User, email: params["email"])
     case authenticate(user, params["password"]) do
       true -> {:ok, user}
-      _    -> {:error}
+      _    -> :error
     end
   end
 end

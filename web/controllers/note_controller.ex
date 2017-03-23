@@ -4,6 +4,7 @@ defmodule Notex.NoteController do
   require Logger
 
   alias Notex.Note
+  alias Notex.Tag
 
   def index(conn, _params) do
     notes = Repo.all(Note)
@@ -16,18 +17,38 @@ defmodule Notex.NoteController do
   end
 
   def create(conn, %{"note" => note_params}) do
+    Logger.debug inspect note_params
     changeset = Note.changeset(%Note{}, note_params)
 
-    Logger.debug inspect(changeset, pretty: true)
-    Logger.debug inspect(get_session(conn, :current_user), pretty: true)
-
     case Repo.insert(changeset) do
-      {:ok, _note} ->
+      {:ok, note} ->
+        note = create_note_tag(note, note_params["tag_ids"])
         conn
         |> put_flash(:info, "Note created successfully.")
         |> redirect(to: note_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+
+  end
+
+  defp create_note_tag(note, tag_ids) do
+    query = from t in Tag,
+      where: t.id in ^tag_ids,
+      select: t
+
+    tags = Repo.all(query)
+
+    changeset = note
+      |> Repo.preload(:tags)
+      |> Ecto.Changeset.change()
+      |> Ecto.Changeset.put_assoc(:tags, tags)
+
+    case Repo.update(changeset) do
+      {:ok, note} ->
+        note
+      {:error, changeset} ->
+        render("error.json", changeset)
     end
   end
 

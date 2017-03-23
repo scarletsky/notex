@@ -10,6 +10,6 @@ defmodule Notex.TagView do
   end
 
   def render("tag.json", %{tag: tag}) do
-    %{id: tag.id}
+    Map.take(tag, [:id, :name])
   end
 end

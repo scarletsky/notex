@@ -1,10 +1,13 @@
 defmodule Notex.TagController do
   use Notex.Web, :controller
 
+  import Ecto.Query
+
   alias Notex.Tag
+  alias Notex.User
 
   def index(conn, _params) do
-    tags = Repo.all(Tag)
+    tags = Repo.all Tag
     render(conn, "index.json", tags: tags)
   end
 
