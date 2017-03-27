@@ -13,7 +13,13 @@ defmodule Notex.NoteController do
 
   def new(conn, _params) do
     changeset = Note.changeset(%Note{})
-    render(conn, "new.html", changeset: changeset)
+    tags = Repo.all(Tag)
+      |> Enum.map(fn t -> {t.name, t.id} end)
+
+    conn
+      |> assign(:changeset, changeset)
+      |> assign(:tags, tags)
+      |> render("new.html")
   end
 
   def create(conn, %{"note" => note_params}) do
