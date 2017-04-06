@@ -2,6 +2,8 @@ defmodule Notex.SessionController do
   use Notex.Web, :controller
   alias Notex.User
 
+  require Logger
+
   def logged_in?(conn), do: !!current_user(conn)
 
   def current_user(conn) do
@@ -20,7 +22,7 @@ defmodule Notex.SessionController do
         |> put_session(:current_user, user.id)
         |> put_flash(:info, "Logged in.")
         |> redirect(to: "/")
-      {:error} ->
+      :error ->
         conn
         |> put_flash(:info, "Login failed")
         |> render("login.html")
