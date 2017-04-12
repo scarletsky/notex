@@ -1,4 +1,4 @@
-  defmodule Notex.TagController do
+defmodule Notex.TagController do
   use Notex.Web, :controller
 
   require Logger
@@ -8,7 +8,7 @@
 
   def index(conn, tag_params) do
     query = from t in Tag,
-      where: like(t.name, ^tag_params["name"]),
+      where: like(t.name, ^"%#{tag_params["name"]}%"),
       select: t
     tags = Repo.all query
     render(conn, "index.json", tags: tags)
@@ -17,8 +17,6 @@
   def create(conn, %{"tag" => tag_params}) do
     tag_params = Map.put(tag_params, "creator_id", get_session(conn, :current_user))
     changeset = Tag.changeset(%Tag{}, tag_params)
-
-    Logger.debug inspect(changeset)
 
     case Repo.insert(changeset) do
       {:ok, tag} ->

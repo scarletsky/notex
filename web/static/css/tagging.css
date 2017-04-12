@@ -1,0 +1,20 @@
+.tagging .option {
+    border: 1px solid black;
+}
+
+.tagging .option.active {
+    background-color: rgba(255, 0, 0, 0.4)
+}
+
+.tagging .tag {
+    display: inline-block;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.tagging .tag .close {
+    display: inline-block;
+    margin-left: 5px;
+}

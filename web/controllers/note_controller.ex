@@ -64,7 +64,7 @@ defmodule Notex.NoteController do
   end
 
   def edit(conn, %{"id" => id}) do
-    note = Repo.get!(Note, id)
+    note = Repo.get!(Note, id) |> Repo.preload(:tags)
     changeset = Note.changeset(note)
     render(conn, "edit.html", note: note, changeset: changeset)
   end

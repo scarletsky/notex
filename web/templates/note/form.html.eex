@@ -17,9 +17,8 @@
 
   <div class="form-group">
     <label>Tags</label>
-    <input type="text" id="tagging">
+    <div id="tagging"></div>
   </div>
-
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
@@ -28,7 +27,9 @@
   <script type="text/javascript">
     var tagging = require('web/static/js/tagging').tagging;
     var request = require('web/static/js/request').request;
-    tagging(document.getElementById('tagging'), {});
+    tagging(document.getElementById('tagging'), {
+      name: 'note[tag_ids][]',
+    });
   </script>
 
 <% end %>
