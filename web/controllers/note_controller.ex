@@ -19,7 +19,6 @@ defmodule Notex.NoteController do
   end
 
   def create(conn, %{"note" => note_params}) do
-    Logger.debug inspect note_params
     changeset = Note.changeset(%Note{}, note_params)
 
     case Repo.insert(changeset) do
@@ -31,26 +30,6 @@ defmodule Notex.NoteController do
         render(conn, "new.html", changeset: changeset)
     end
 
-  end
-
-  defp create_note_tag(note, tag_ids) do
-    query = from t in Tag,
-      where: t.id in ^tag_ids,
-      select: t
-
-    tags = Repo.all(query)
-
-    changeset = note
-      |> Repo.preload(:tags)
-      |> Ecto.Changeset.change()
-      |> Ecto.Changeset.put_assoc(:tags, tags)
-
-    case Repo.update(changeset) do
-      {:ok, note} ->
-        note
-      {:error, changeset} ->
-        render("error.json", changeset)
-    end
   end
 
   def show(conn, %{"id" => id}) do
