@@ -24,7 +24,6 @@ defmodule Notex.NoteController do
 
     case Repo.insert(changeset) do
       {:ok, note} ->
-        note = create_note_tag(note, note_params["tag_ids"])
         conn
         |> put_flash(:info, "Note created successfully.")
         |> redirect(to: note_path(conn, :index))
@@ -68,7 +67,6 @@ defmodule Notex.NoteController do
   def update(conn, %{"id" => id, "note" => note_params}) do
     note = Repo.get!(Note, id) |> Repo.preload(:tags)
     changeset = Note.changeset(note, note_params)
-      |> update_note_tags_association(note_params["tag_ids"])
 
     case Repo.update(changeset) do
       {:ok, note} ->
@@ -77,19 +75,6 @@ defmodule Notex.NoteController do
         |> redirect(to: note_path(conn, :show, note))
       {:error, changeset} ->
         render(conn, "edit.html", note: note, changeset: changeset)
-    end
-  end
-
-  defp update_note_tags_association(changeset, tag_ids) do
-    if tag_ids do
-      tags = Repo.all(
-        from t in Tag,
-          where: t.id in ^tag_ids,
-          select: t
-      )
-      Ecto.Changeset.put_assoc(changeset, :tags, tags)
-    else
-      changeset
     end
   end
 
