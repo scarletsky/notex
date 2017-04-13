@@ -9,7 +9,7 @@ export function tagging(target, options) {
     let optionsWrapper = document.createElement('ul');
     let tagsWrapper = document.createElement('ul');
     let hiddenInputWrapper = document.createElement('div');
-    let tagsList = [];
+    let tagsList = options.tags || [];
     let optionsList = [];
 
     function createTag(tag, callback) {
@@ -17,10 +17,6 @@ export function tagging(target, options) {
             method: 'POST',
             body: { tag: tag }
         }, callback);
-    }
-
-    function listTags(query, callback) {
-        request('/api/tags', { query: query }, callback);
     }
 
     function clearOptions() {
@@ -148,4 +144,7 @@ export function tagging(target, options) {
     inputElement.addEventListener('keyup', onKeyup);
     inputElement.addEventListener('keydown', onKeydown);
     tagsWrapper.addEventListener('click', onTagsWrapperClick);
+
+    // initialize tags
+    tagsList.length > 0 && tagsList.forEach(t => createTagElement(t));
 }

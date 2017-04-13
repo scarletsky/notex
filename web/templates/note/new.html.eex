@@ -1,7 +1,6 @@
 <h2>New note</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        tags: @tags,
                         action: note_path(@conn, :create) %>
 
 <%= link "Back", to: note_path(@conn, :index) %>
