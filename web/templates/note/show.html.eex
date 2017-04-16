@@ -1,8 +1,8 @@
-<h2>Show note</h2>
+<h2> <%= @note.title %> </h2>
 
-<ul>
-
-</ul>
+<div>
+    <%= Earmark.as_html!(@note.content) |> raw %>
+</div>
 
 <%= link "Edit", to: note_path(@conn, :edit, @note) %>
 <%= link "Back", to: note_path(@conn, :index) %>
