@@ -26,13 +26,13 @@
 
   <script type="text/javascript">
     var tagging = require('web/static/js/tagging').tagging;
-    var request = require('web/static/js/request').request;
     tagging(document.getElementById('tagging'), {
       name: 'note[tag_ids][]',
       tags: <%= if @changeset.data.id do
-        raw @changeset.data.tags
+        @changeset.data.tags
           |> Enum.map(fn t -> %{id: t.id, name: t.name} end)
           |> Poison.Encoder.encode([])
+          |> raw
         else
           "[]"
         end
