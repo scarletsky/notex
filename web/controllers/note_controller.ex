@@ -6,7 +6,7 @@ defmodule Notex.NoteController do
   alias Notex.Note
   alias Notex.Tag
 
-  plug Notex.Plug.Authenticate
+  plug Notex.Plug.Authenticate when action in [:new, :create, :edit, :update, :delete]
 
   def index(conn, _params) do
     notes = Repo.all(Note)

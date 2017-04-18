@@ -6,6 +6,8 @@ defmodule Notex.TagController do
   alias Notex.Tag
   alias Notex.User
 
+  plug Notex.Plug.Authenticate when action in [:create, :update, :delete]
+
   def index(conn, tag_params) do
     query = from t in Tag,
       where: like(t.name, ^"%#{tag_params["name"]}%"),
