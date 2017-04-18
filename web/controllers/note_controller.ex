@@ -6,6 +6,8 @@ defmodule Notex.NoteController do
   alias Notex.Note
   alias Notex.Tag
 
+  plug Notex.Plug.Authenticate
+
   def index(conn, _params) do
     notes = Repo.all(Note)
     render(conn, "index.html", notes: notes)
