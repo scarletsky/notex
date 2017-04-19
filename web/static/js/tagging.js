@@ -11,11 +11,38 @@ export function tagging(target, options) {
     let tagsList = options.tags || [];
     let optionsList = [];
 
-    function createTag(tag, callback) {
+    function createTag(tag) {
         request('/api/tags', {
             method: 'POST',
             body: { tag: tag }
-        }, callback);
+        }, function (err, res) {
+            tagsList.push(res.data);
+            createTagElement(res.data);
+            inputElement.value = '';
+            clearOptions();
+        });
+    }
+
+    function onGetTags(query) {
+        request('/api/tags', { query: query }, function (err, res) {
+            clearOptions();
+            optionsList = [];
+            res.data.forEach(item => {
+                let isExist = tagsList.filter(t => t.id === item.id).length > 0;
+                if (!isExist) {
+                    createOption(item);
+                    optionsList.push(item);
+                }
+            });
+
+            if (optionsList.filter(o => o.name === query.name).length === 0) {
+                let o = { name: '创建新标签：' + query.name };
+                createOption(o);
+                optionsList.push(o);
+            }
+
+            setCurrentIndex(optionsList.length > 0 ? 0 : -1);
+        });
     }
 
     function clearOptions() {
@@ -91,20 +118,19 @@ export function tagging(target, options) {
 
         if (e.which === 13) {
             e.preventDefault();
-            tagsList.push(tagsList[currentIndex]);
-            createTagElement(optionsList[currentIndex]);
-            inputElement.value = '';
-            clearOptions();
-            // createTag({ name: input }, function (err, res) {
-            //     console.log(err, res);
-            // });
-        } else {
-            request('/api/tags', { query: { name: input } }, function (err, res) {
+
+            let tag = optionsList[currentIndex];
+
+            if (typeof tag.id === 'undefined') {
+                createTag(tag);
+            } else {
+                tagsList.push(optionsList[currentIndex]);
+                createTagElement(optionsList[currentIndex]);
+                inputElement.value = '';
                 clearOptions();
-                optionsList = res.data;
-                res.data.forEach(item => createOption(item));
-                setCurrentIndex(optionsList.length > 0 ? 0 : -1);
-            });
+            }
+        } else {
+            onGetTags({ name: input });
         }
     }
 
