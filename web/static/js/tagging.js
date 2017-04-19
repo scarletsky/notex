@@ -8,7 +8,6 @@ export function tagging(target, options) {
     let inputElement = document.createElement('input');
     let optionsWrapper = document.createElement('ul');
     let tagsWrapper = document.createElement('ul');
-    let hiddenInputWrapper = document.createElement('div');
     let tagsList = options.tags || [];
     let optionsList = [];
 
@@ -58,30 +57,22 @@ export function tagging(target, options) {
         let tagElement = document.createElement('li');
         tagElement.classList.add('tag');
         tagElement.textContent = tag.name;
-        tagElement.dataset.id = tag.id;
 
         let close = document.createElement('span');
         close.classList.add('close');
         close.textContent = 'x';
 
-        tagElement.append(close);
-        tagsWrapper.append(tagElement);
-        createHiddenInputElement(tag);
-    }
-
-    function createHiddenInputElement(tag) {
         let hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = options.name;
         hiddenInput.value = tag.id;
-        hiddenInputWrapper.append(hiddenInput);
+
+        tagElement.append(close);
+        tagElement.append(hiddenInput);
+        tagsWrapper.append(tagElement);
     }
 
     function removeTagElement(tagElement) {
-        let tagId = tagElement.dataset.id;
-        let hiddenInputElement = hiddenInputWrapper.querySelector('input[value="' + tagId + '"]')
-
-        hiddenInputWrapper.removeChild(hiddenInputElement);
         tagsWrapper.removeChild(tagElement);
     }
 
@@ -138,7 +129,6 @@ export function tagging(target, options) {
 
     target.classList.add('tagging');
     target.append(tagsWrapper);
-    target.append(hiddenInputWrapper);
     target.append(inputElement);
     target.append(optionsWrapper);
     inputElement.addEventListener('keyup', onKeyup);
