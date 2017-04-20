@@ -10,6 +10,7 @@ export function tagging(target, options) {
     let tagsWrapper = document.createElement('ul');
     let tagsList = options.tags || [];
     let optionsList = [];
+    let createTipsText = '创建新标签：';
 
     function createTag(tag) {
         request('/api/tags', {
@@ -35,8 +36,8 @@ export function tagging(target, options) {
                 }
             });
 
-            if (optionsList.filter(o => o.name === query.name).length === 0) {
-                let o = { name: '创建新标签：' + query.name };
+            if (res.data.filter(o => o.name === query.name).length === 0) {
+                let o = { name: createTipsText + query.name };
                 createOption(o);
                 optionsList.push(o);
             }
@@ -122,6 +123,7 @@ export function tagging(target, options) {
             let tag = optionsList[currentIndex];
 
             if (typeof tag.id === 'undefined') {
+                tag.name = tag.name.slice(createTipsText.length);
                 createTag(tag);
             } else {
                 tagsList.push(optionsList[currentIndex]);
