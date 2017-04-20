@@ -123,6 +123,8 @@ export function tagging(target, options) {
         if (e.which === 13) {
             e.preventDefault();
 
+            if (optionsList.length === 0) return;
+
             let tag = optionsList[currentIndex];
 
             if (typeof tag.id === 'undefined') {
