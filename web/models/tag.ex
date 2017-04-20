@@ -16,5 +16,6 @@ defmodule Notex.Tag do
     struct
     |> cast(params, [:name, :aliases, :creator_id])
     |> validate_required([:name, :creator_id])
+    |> unique_constraint(:name)
   end
 end
