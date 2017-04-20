@@ -120,6 +120,8 @@ export function tagging(target, options) {
 
         let input = e.target.value;
 
+        if (!input) return clearOptions();
+
         if (e.which === 13) {
             e.preventDefault();
 
