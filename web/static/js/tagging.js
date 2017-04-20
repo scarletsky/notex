@@ -98,9 +98,12 @@ export function tagging(target, options) {
         tagElement.append(close);
         tagElement.append(hiddenInput);
         tagsWrapper.append(tagElement);
+        setCurrentIndex(-1);
     }
 
     function removeTagElement(tagElement) {
+        let inputElement = tagElement.getElementsByTagName('input')[0];
+        tagsList = tagsList.filter(t => t.id !== parseInt(inputElement.value));
         tagsWrapper.removeChild(tagElement);
     }
 
