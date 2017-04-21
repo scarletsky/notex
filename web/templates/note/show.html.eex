@@ -4,5 +4,8 @@
     <%= Earmark.as_html!(@note.content) |> raw %>
 </div>
 
-<%= link "Edit", to: note_path(@conn, :edit, @note) %>
+<%= if is_owner(@conn, @note) do
+        link "Edit", to: note_path(@conn, :edit, @note)
+    end
+%>
 <%= link "Back", to: note_path(@conn, :index) %>
