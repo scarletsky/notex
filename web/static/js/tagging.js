@@ -32,14 +32,12 @@ export function tagging(target, options) {
                 let isExist = tagsList.filter(t => t.id === item.id).length > 0;
                 if (!isExist) {
                     createOption(item);
-                    optionsList.push(item);
                 }
             });
 
             if (res.data.filter(o => o.name === query.name).length === 0) {
                 let o = { name: createTipsText + query.name };
                 createOption(o);
-                optionsList.push(o);
             }
 
             setCurrentIndex(optionsList.length > 0 ? 0 : -1);
@@ -53,9 +51,11 @@ export function tagging(target, options) {
     }
 
     function createOption(option) {
+        optionsList.push(option);
         let optionElement = document.createElement('li');
         optionElement.classList.add('option');
         optionElement.textContent = option.name;
+        optionElement.dataset.index = optionsList.length - 1;
         optionsWrapper.append(optionElement);
     }
 
@@ -114,6 +114,35 @@ export function tagging(target, options) {
         }
     }
 
+    function onOptionsWrapperHover(e) {
+        if (e.target !== optionsWrapper) {
+            let index = parseInt(e.target.dataset.index);
+            setCurrentIndex(index);
+        }
+    }
+
+    function onOptionsWrapperClick(e) {
+        if (e.target !== optionsWrapper) {
+            onOptionSelect();
+        }
+    }
+
+    function onOptionSelect(e) {
+        if (optionsList.length === 0) return;
+
+        let tag = optionsList[currentIndex];
+
+        if (typeof tag.id === 'undefined') {
+            tag.name = tag.name.slice(createTipsText.length);
+            createTag(tag);
+        } else {
+            tagsList.push(optionsList[currentIndex]);
+            createTagElement(optionsList[currentIndex]);
+            inputElement.value = '';
+            clearOptions();
+        }
+    }
+
     function onKeyup(e) {
 
         if (e.which === 38 || e.which === 40) return;
@@ -124,20 +153,7 @@ export function tagging(target, options) {
 
         if (e.which === 13) {
             e.preventDefault();
-
-            if (optionsList.length === 0) return;
-
-            let tag = optionsList[currentIndex];
-
-            if (typeof tag.id === 'undefined') {
-                tag.name = tag.name.slice(createTipsText.length);
-                createTag(tag);
-            } else {
-                tagsList.push(optionsList[currentIndex]);
-                createTagElement(optionsList[currentIndex]);
-                inputElement.value = '';
-                clearOptions();
-            }
+            onOptionSelect();
         } else {
             onGetTags({ name: input });
         }
@@ -169,6 +185,8 @@ export function tagging(target, options) {
     inputElement.addEventListener('keyup', onKeyup);
     inputElement.addEventListener('keydown', onKeydown);
     tagsWrapper.addEventListener('click', onTagsWrapperClick);
+    optionsWrapper.addEventListener('mousemove', onOptionsWrapperHover);
+    optionsWrapper.addEventListener('click', onOptionsWrapperClick);
 
     // initialize tags
     tagsList.length > 0 && tagsList.forEach(t => createTagElement(t));
