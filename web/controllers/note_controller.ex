@@ -21,7 +21,7 @@ defmodule Notex.NoteController do
   end
 
   def create(conn, %{"note" => note_params}) do
-    changeset = Note.changeset(%Note{}, note_params)
+    changeset = Note.changeset(%Note{}, Map.put(note_params, "creator_id", conn.assigns[:current_user]))
 
     case Repo.insert(changeset) do
       {:ok, note} ->

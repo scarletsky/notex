@@ -17,7 +17,7 @@ defmodule Notex.TagController do
   end
 
   def create(conn, %{"tag" => tag_params}) do
-    tag_params = Map.put(tag_params, "creator_id", get_session(conn, :current_user))
+    tag_params = Map.put(tag_params, "creator_id", conn.assigns[:current_user])
     changeset = Tag.changeset(%Tag{}, tag_params)
 
     case Repo.insert(changeset) do
