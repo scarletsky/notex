@@ -39,11 +39,6 @@ exports.config = {
     },
     sass: {
       mode: 'native',
-      options: {
-        includePaths: [
-            'node_modules/normalize.css/'
-        ]
-      }
     }
   },
 
@@ -56,7 +51,8 @@ exports.config = {
   npm: {
     enabled: true,
     styles: {
-        "highlight.js": ["styles/github.css"]
+        "highlight.js": ["styles/github.css"],
+        "normalize.css": ["normalize.css"]
     }
   }
 };
