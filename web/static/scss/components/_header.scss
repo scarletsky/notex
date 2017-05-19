@@ -12,5 +12,15 @@
 
     .header-right {
         float: right;
+        line-height: $header-height;
+
+        > li {
+            float: left;
+            margin-left: 20px;
+
+            .iconfont {
+                font-size: $h2;
+            }
+        }
     }
 }
