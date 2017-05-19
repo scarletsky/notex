@@ -12,30 +12,29 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if logged_in?(@conn) do %>
-              <li><%= current_user(@conn).email %></li>
-              <li><%= link "Logout", to: session_path(@conn, :delete), method: :delete %></li>
-            <% else %>
-              <li><%= link "Login",    to: "/login" %></li>
-              <li><%= link "Register", to: registration_path(@conn, :index) %></li>
-            <% end %>
-          </ul>
-        </nav>
-      </header>
+    <header class="layout-header">
+      <nav role="navigation" class="header">
+        <span class="logo">Notex</span>
+        <ul class="header-right">
+          <%= if logged_in?(@conn) do %>
+            <li><%= current_user(@conn).email %></li>
+            <li><%= link "Logout", to: session_path(@conn, :delete), method: :delete %></li>
+          <% else %>
+            <li><%= link "Login",    to: "/login" %></li>
+            <li><%= link "Register", to: registration_path(@conn, :index) %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
   </body>
 </html>

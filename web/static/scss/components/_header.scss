@@ -1,0 +1,16 @@
+.header {
+    width: $container-width;
+    height: $header-height;
+    margin: auto;
+    color: $white;
+
+    .logo {
+        font-size: $title;
+        line-height: $header-height;
+        font-weight: $font-weight;
+    }
+
+    .header-right {
+        float: right;
+    }
+}
