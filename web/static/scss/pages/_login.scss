@@ -1,0 +1,28 @@
+.pages-login {
+    .card {
+        width: 300px;
+        margin: auto;
+    }
+
+    .button {
+        margin-top: 20px;
+        width: 100%;
+        color: $green;
+        border-color: $green;
+
+        &:hover {
+            cursor: pointer;
+            color: $white;
+            background-color: $green;
+        }
+    }
+
+    .new {
+        color: $coffee;
+        margin-top: 20px;
+
+        a {
+            color: $green;
+        }
+    }
+}

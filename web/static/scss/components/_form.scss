@@ -1,0 +1,18 @@
+.label {
+    color: $coffee;
+    font-size: $p;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    height: $form-height;
+    line-height: $form-height;
+    box-sizing: border-box;
+    outline: none;
+    margin: 10px 0;
+    padding: 5px 10px;
+    color: $coffee;
+    border: 1px solid $gray-border;
+    border-radius: $border-radius;
+}
