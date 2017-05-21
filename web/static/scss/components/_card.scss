@@ -2,4 +2,28 @@
     border: 1px solid $gray-border;
     border-radius: $border-radius;
     padding: $card-padding;
+    position: relative;
+
+    .card-title {
+        font-size: $title;
+        font-weight: $font-weight;
+        line-height: 36px;
+        color: $green;
+    }
+
+    .card-content {
+        font-size: $p;
+        font-weight: $font-weight;
+        line-height: 24px;
+        color: $gray-text;
+    }
+
+    .card-footer {
+        width: 100%;
+        height: $card-footer-height;
+        background-color: $gray-bg;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
 }

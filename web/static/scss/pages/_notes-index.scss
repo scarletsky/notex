@@ -1,0 +1,34 @@
+.pages-notes-index {
+    .card {
+        width: 264px;
+        height: 180px;
+        margin-bottom: 20px;
+        color: $gray-text;
+
+        .card-title {
+            a {
+                color: $green;
+            }
+        }
+
+        .user-info {
+            float: left;
+
+            .avatar {
+                margin: ($card-footer-height - $avatar-size) / 2;
+            }
+
+            .username {
+                display: inline-block;
+                line-height: $card-footer-height;
+                vertical-align: top;
+            }
+        }
+    }
+
+    .notes-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
