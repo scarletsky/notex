@@ -9,7 +9,7 @@
                 <div class="card-footer">
                     <div class="user-info">
                         <div class="avatar"></div>
-                        <span class="username"><%= note.id %></span>
+                        <span class="username"><%= note.creator.username %></span>
                     </div>
                 </div>
             </div>

@@ -5,8 +5,8 @@ defmodule Notex.Note do
   schema "notes" do
     field :title, :string
     field :content, :string
-    field :creator_id, :integer
     field :is_secret, :boolean
+    belongs_to :creator, Notex.User
     many_to_many :tags, Notex.Tag, join_through: Notex.NoteTag, on_replace: :delete
     timestamps()
   end

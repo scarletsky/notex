@@ -9,7 +9,7 @@ defmodule Notex.NoteController do
   plug Notex.Plug.Authenticate when action in [:new, :create, :edit, :update, :delete]
 
   def index(conn, _params) do
-    notes = Repo.all(Note)
+    notes = Repo.all(Note) |> Repo.preload(:creator)
     render(conn, "index.html", notes: notes)
   end
 
