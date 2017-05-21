@@ -17,7 +17,7 @@ defmodule Notex.Router do
   scope "/", Notex do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", NoteController, :index
 
     resources "/registrations", RegistrationController, only: [:index, :create]
     get  "/login", SessionController, :index
