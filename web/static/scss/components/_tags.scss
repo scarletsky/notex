@@ -1,0 +1,9 @@
+.tag {
+    display: inline-block;
+    border: 1px solid $gray-border;
+    border-radius: $border-radius;
+    background-color: $gray-bg;
+    text-align: center;
+    padding: 5px;
+    margin-right: -4px + 10px;
+}

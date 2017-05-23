@@ -2,13 +2,25 @@
     .card {
         width: 264px;
         height: 180px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         color: $gray-text;
 
         .card-title {
             a {
                 color: $green;
             }
+        }
+
+        .note-content {
+            width: 100%;
+            height: $title * 2;
+            line-height: $title;
+            overflow: hidden;
+        }
+
+        .tags {
+            margin-top: 20px;
+            font-size: 14px;
         }
 
         .user-info {

@@ -5,7 +5,19 @@
                 <div class="card-title">
                     <%= link note.title, to: note_path(@conn, :show, note) %>
                 </div>
-                <div class="card-content"><%= note.content %></div>
+
+                <div class="card-content">
+                    <div class="note-content">
+                        <%= note.content %>
+                    </div>
+
+                    <div class="tags">
+                        <%= for tag <- note.tags do %>
+                            <div class="tag"><%= tag.name %></div>
+                        <% end %>
+                    </div>
+                </div>
+
                 <div class="card-footer">
                     <div class="user-info">
                         <div class="avatar"></div>
