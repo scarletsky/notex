@@ -6,8 +6,11 @@ export function tagging(target, options) {
     let isLoading = false;
     let currentIndex = -1;
     let inputElement = document.createElement('input');
+    inputElement.classList.add('input', 'keyword');
+    inputElement.placeholder = 'Type tags here...';
     let optionsWrapper = document.createElement('ul');
     let tagsWrapper = document.createElement('ul');
+    tagsWrapper.classList.add('tags');
     let tagsList = options.tags || [];
     let optionsList = [];
     let createTipsText = '创建新标签：';

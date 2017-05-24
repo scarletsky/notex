@@ -1,5 +1,6 @@
 .pages-notes-index {
     .card {
+        box-sizing: content-box;
         width: 264px;
         height: 180px;
         margin-bottom: 40px;
@@ -20,7 +21,6 @@
 
         .tags {
             margin-top: 20px;
-            font-size: 14px;
         }
 
         .user-info {

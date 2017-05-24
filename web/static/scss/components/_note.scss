@@ -1,0 +1,40 @@
+.note.note-detail {
+    .label {
+        display: inline-block;
+        width: 10%;
+        text-align: right;
+        color: $gray-text;
+        font-size: $h2;
+        line-height: $form-height + 20;
+        font-weight: $font-weight;
+        margin-right: -5px;
+        margin-bottom: 0;
+        padding-right: 5px;
+        vertical-align: top;
+    }
+
+    .input, .textarea {
+        border: none;
+        outline: none;
+        font-weight: $font-weight;
+    }
+
+    .title {
+        width: 90%;
+        font-size: $title;
+        line-height: $form-height;
+        color: $green;
+        text-align: left;
+    }
+
+    .content {
+        width: 90%;
+        height: $form-height * 10;
+        margin: 0 0 0 10%;
+    }
+
+    .tagging {
+        width: 90%;
+        display: inline-block;
+    }
+}

@@ -3,7 +3,43 @@
     border: 1px solid $gray-border;
     border-radius: $border-radius;
     background-color: $gray-bg;
+    color: $gray-text;
     text-align: center;
-    padding: 5px;
-    margin-right: -4px + 10px;
+    padding: 0 5px;
+    font-size: 14px;
+    line-height: 26px;
+    margin-right: -4px + 15px;
+}
+
+.tagging {
+    padding-left: 10px;
+
+    .keyword {
+        width: 300px;
+    }
+}
+
+.tags {
+    display: inline-block;
+}
+
+.tagging .option {
+    border: 1px solid black;
+}
+
+.tagging .option.active {
+    background-color: rgba(255, 0, 0, 0.4)
+}
+
+.tagging .tag .close {
+    display: inline-block;
+    width: 20px;
+    height: 26px;
+    margin-left: 5px;
+    margin-right: -5px;
+    border-left: 1px solid $gray-border;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

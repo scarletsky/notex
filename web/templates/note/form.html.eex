@@ -1,43 +1,49 @@
-<%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+<div class="pages-notes-form note note-detail">
 
-  <div class="form-group">
-    <label>Title</label>
-    <%= text_input f, :title, class: "form-control" %>
-  </div>
+    <%= form_for @changeset, @action, fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
 
-  <div class="form-group">
-    <label>Content</label>
-    <%= textarea f, :content, [class: "form-control", rows: 10] %>
-  </div>
-
-  <div class="form-group">
-    <label>Tags</label>
-    <div id="tagging"></div>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
-
-  <script type="text/javascript">
-    var tagging = require('web/static/js/tagging').tagging;
-    tagging(document.getElementById('tagging'), {
-      name: 'note[tag_ids][]',
-      tags: <%= if @changeset.data.id do
-        @changeset.data.tags
-          |> Enum.map(fn t -> %{id: t.id, name: t.name} end)
-          |> Poison.Encoder.encode([])
-          |> raw
-        else
-          "[]"
-        end
+      <div class="form-group">
+        <label class="label">Title</label>
+        <%= text_input f, :title,
+            class: "input title",
+            placeholder: "Type your title here...",
+            autocomplete: "off"
         %>
-    });
-  </script>
+      </div>
 
-<% end %>
+      <div class="form-group">
+        <%= textarea f, :content, [class: "textarea content", rows: 10, placeholder: "Your note content here..."] %>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Tags</label>
+        <div id="tagging"></div>
+      </div>
+
+      <div class="form-group">
+        <%= submit "Submit", class: "button" %>
+      </div>
+
+      <script type="text/javascript">
+        var tagging = require('web/static/js/tagging').tagging;
+        tagging(document.getElementById('tagging'), {
+          name: 'note[tag_ids][]',
+          tags: <%= if @changeset.data.id do
+            @changeset.data.tags
+              |> Enum.map(fn t -> %{id: t.id, name: t.name} end)
+              |> Poison.Encoder.encode([])
+              |> raw
+            else
+              "[]"
+            end
+            %>
+        });
+      </script>
+
+    <% end %>
+</div>
