@@ -1,11 +1,32 @@
-<h2> <%= @note.title %> </h2>
+<div class="pages-notes-form note note-detail">
+  <div>
+    <label class="label">Title</label>
+    <h2 class="title">
+      <%= @note.title %>
+    </h2>
+  </div>
 
-<div>
+  <div class="content">
     <%= Earmark.as_html!(@note.content) |> raw %>
-</div>
+  </div>
 
-<%= if is_owner(@conn, @note) do
-        link "Edit", to: note_path(@conn, :edit, @note)
-    end
-%>
-<%= link "Back", to: note_path(@conn, :index) %>
+  <%= if length(@note.tags) > 0 do %>
+    <div>
+      <label class="label">Tags</label>
+      <div class="tagging">
+        <ul class="tags">
+          <%= for tag <- @note.tags do %>
+            <li class="tag">
+              <%= tag.name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= if is_owner(@conn, @note) do
+          link "Edit", to: note_path(@conn, :edit, @note), class: "button"
+      end
+  %>
+</div>

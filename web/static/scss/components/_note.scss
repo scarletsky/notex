@@ -4,7 +4,7 @@
         width: 10%;
         text-align: right;
         color: $gray-text;
-        font-size: $h2;
+        font-size: $p;
         line-height: $form-height + 20;
         font-weight: $font-weight;
         margin-right: -5px;
@@ -21,20 +21,28 @@
 
     .title {
         width: 90%;
+        height: $form-height + 10;
         font-size: $title;
         line-height: $form-height;
         color: $green;
         text-align: left;
+        display: inline-block;
+        margin: 5px 0;
+        padding: 5px 10px;
     }
 
     .content {
         width: 90%;
         height: $form-height * 10;
         margin: 0 0 0 10%;
+        padding-left: 10px;
+        color: $coffee;
+        font-size: $p;
     }
 
     .tagging {
         width: 90%;
+        line-height: $form-height + 20;
         display: inline-block;
     }
 }

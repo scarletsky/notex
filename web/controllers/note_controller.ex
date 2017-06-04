@@ -37,7 +37,7 @@ defmodule Notex.NoteController do
   end
 
   def show(conn, %{"id" => id}) do
-    note = Repo.get!(Note, id)
+    note = Repo.get!(Note, id) |> Repo.preload(:tags)
     render(conn, "show.html", note: note)
   end
 
