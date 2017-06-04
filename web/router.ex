@@ -24,7 +24,7 @@ defmodule Notex.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
 
-    resources "/notes", NoteController
+    resources "/n", NoteController
   end
 
   # Other scopes may use custom stacks.
