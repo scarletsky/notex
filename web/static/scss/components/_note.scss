@@ -33,11 +33,15 @@
 
     .content {
         width: 90%;
-        height: $form-height * 10;
+        min-height: $form-height * 10;
         margin: 0 0 0 10%;
         padding-left: 10px;
         color: $coffee;
         font-size: $p;
+
+        a {
+            color: $green;
+        }
     }
 
     .tagging {
