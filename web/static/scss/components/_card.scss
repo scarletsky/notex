@@ -7,14 +7,14 @@
     .card-title {
         font-size: $title;
         font-weight: $font-weight;
-        line-height: 36px;
+        line-height: $line-height * 1.5;
         color: $green;
     }
 
     .card-content {
         font-size: $p;
         font-weight: $font-weight;
-        line-height: 24px;
+        line-height: $line-height;
         color: $gray-text;
     }
 

@@ -1,8 +1,8 @@
 .pages-notes-index {
     .card {
         box-sizing: content-box;
-        width: 264px;
-        height: 180px;
+        width: 420px;
+        height: 220px;
         margin-bottom: 40px;
         color: $gray-text;
 
@@ -14,7 +14,7 @@
 
         .note-content {
             width: 100%;
-            height: $title * 2;
+            height: $title * 3;
             line-height: $title;
             overflow: hidden;
         }
